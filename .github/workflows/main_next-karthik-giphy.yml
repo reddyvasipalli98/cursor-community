@@ -25,6 +25,18 @@ jobs:
           npm install
           npm run build
 
+      - name: Check if dist folder exists
+        run: |
+          if (Test-Path "dist") {
+            Write-Host "✅ dist folder exists"
+            Get-ChildItem dist -Recurse | Select-Object Name, Length
+          } else {
+            Write-Host "❌ dist folder not found"
+            Write-Host "Current directory contents:"
+            Get-ChildItem | Select-Object Name
+            exit 1
+          }
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -43,6 +55,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+          path: ./deployment
+
+      - name: List downloaded files
+        run: |
+          echo "Contents of deployment directory:"
+          find ./deployment -type f -name "*" | head -20
+          echo "Total files: $(find ./deployment -type f | wc -l)"
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -57,4 +76,4 @@ jobs:
         with:
           app-name: 'next-karthik-giphy'
           slot-name: 'Production'
-          package: dist
+          package: ./deployment

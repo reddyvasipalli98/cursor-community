@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: 'next-karthik-giphy'
           slot-name: 'Production'
-          package: .
+          package: dist
           

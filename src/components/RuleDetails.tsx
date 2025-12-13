@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface RuleDetailsProps {
   isOpen: boolean
   onClose: () => void

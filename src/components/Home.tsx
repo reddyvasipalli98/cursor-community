@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import {  useState } from 'react'
 import Generate from './Generate'
 import RuleDetails from './RuleDetails'
 

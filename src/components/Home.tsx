@@ -1,6 +1,7 @@
 import {  useState } from 'react'
 import Generate from './Generate'
 import RuleDetails from './RuleDetails'
+import GoogleAuth from './GoogleAuth'
 
 export default function Home() {
     const [isGenerateOpen, setIsGenerateOpen] = useState(false)
@@ -55,7 +56,8 @@ export default function Home() {
                 <nav className="menu desktop-menu">
                     <ul className="menu-list">
                         <li className="menu-item">
-                            <button className="menu-link">Rules</button>
+                            {/* <button className="menu-link">Rules</button> */}
+                            <GoogleAuth />
                         </li>
                         <li className="menu-item">
                             <button className="menu-link" onClick={() => setIsGenerateOpen(true)}>Generate</button>
@@ -79,7 +81,8 @@ export default function Home() {
                 <nav className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
                     <ul className="mobile-menu-list">
                         <li className="mobile-menu-item">
-                            <button className="mobile-menu-link" onClick={closeMobileMenu}>Rules</button>
+                            {/* <button className="mobile-menu-link" onClick={closeMobileMenu}>Rules</button> */}
+                            <GoogleAuth />
                         </li>
                         <li className="mobile-menu-item">
                             <button className="mobile-menu-link" onClick={() => { setIsGenerateOpen(true); closeMobileMenu(); }}>Generate</button>

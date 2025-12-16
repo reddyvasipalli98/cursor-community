@@ -621,3 +621,178 @@ body {
   font-size: inherit;
   cursor: pointer;
 }
+
+/* Google Auth User Profile Styles */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f9fafb;
+  line-height: 1.2;
+}
+
+.user-email {
+  font-size: 12px;
+  color: #9ca3af;
+  line-height: 1.2;
+}
+
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .user-profile {
+    padding: 6px 8px;
+  }
+  
+  .user-details {
+    display: none; /* Hide user details on mobile to save space */
+  }
+  
+  .logout-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
+
+/* User Profile Card Styles */
+.user-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.user-profile-card.compact {
+  padding: 8px;
+  gap: 8px;
+}
+
+.user-profile-card.not-authenticated {
+  text-align: center;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.profile-picture {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-profile-card.compact .profile-picture {
+  width: 36px;
+  height: 36px;
+}
+
+.profile-info {
+  flex: 1;
+  text-align: left;
+}
+
+.profile-name {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.user-profile-card.compact .profile-name {
+  font-size: 14px;
+}
+
+.profile-email {
+  margin: 0;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.user-profile-card.compact .profile-email {
+  font-size: 12px;
+}
+
+/* Welcome Message Styles */
+.welcome-message {
+  font-size: 18px;
+  color: #f9fafb;
+  margin: 16px 0;
+  text-align: center;
+}
+
+/* User Status Styles */
+.user-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-indicator.online {
+  background: #10b981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+}
+
+.status-indicator.offline {
+  background: #6b7280;
+}
+
+.status-text {
+  color: #e5e7eb;
+  font-size: 13px;
+}

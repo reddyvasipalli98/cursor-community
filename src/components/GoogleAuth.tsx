@@ -1,32 +1,82 @@
-// src/components/GoogleAuth.js
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode'; // You may need to install this package
+import { jwtDecode } from 'jwt-decode';
+import { useAuth } from '../context/AuthContext';
 
-const GoogleAuth = () => {
+interface DecodedToken {
+  sub: string;
+  name: string;
+  email: string;
+  picture: string;
+  given_name?: string;
+  family_name?: string;
+}
+
+const GoogleAuth: React.FC = () => {
+  const { user, isAuthenticated, login, logout } = useAuth();
+
   const onSuccess = (credentialResponse) => {
-    // The credential is a JWT (JSON Web Token)
-    const token = credentialResponse.credential;
-    const decoded = jwtDecode(token);
-    
-    console.log('Login Success:', decoded);
-    
-    // **Important Security Step (Backend Integration)**:
-    // Send the JWT (credentialResponse.credential) to your backend server.
-    // Your backend must verify the token's signature with Google's public key
-    // and extract the user's data (email, name, etc.). The backend then creates
-    // and manages your application's internal session for the user (e.g., by issuing 
-    // your own JWT or a session cookie).
+    try {
+      if (credentialResponse.credential) {
+        const decoded = jwtDecode<DecodedToken>(credentialResponse.credential);
+        
+        const userData = {
+          sub: decoded.sub,
+          name: decoded.name,
+          email: decoded.email,
+          picture: decoded.picture,
+          given_name: decoded.given_name,
+          family_name: decoded.family_name,
+        };
+        
+        login(userData);
+        // console.log('Login Success - User stored in global context:', userData);
+      }
+    } catch (error) {
+      console.error('Failed to decode Google credential:', error);
+    }
   };
 
   const onError = () => {
-    console.log('Login Failed');
+    console.log('Google Login Failed');
   };
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  if (isAuthenticated && user) {
+    return (
+      <div className="user-profile">
+        <div className="user-info">
+          <img 
+            src={user.picture} 
+            alt={user.name}
+            className="user-avatar"
+          />
+          <div className="user-details">
+            <span className="user-name">{user.name}</span>
+            <span className="user-email">{user.email}</span>
+          </div>
+        </div>
+        <button 
+          onClick={handleLogout}
+          className="logout-btn"
+        >
+          Logout
+        </button>
+      </div>
+    );
+  }
 
   return (
     <GoogleLogin 
       onSuccess={onSuccess} 
-      onError={onError} 
+      onError={onError}
+      theme="filled_blue"
+      size="medium"
+      text="signin_with"
+      shape="rectangular"
     />
   );
 };

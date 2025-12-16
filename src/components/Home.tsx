@@ -1,16 +1,26 @@
 import {  useState } from 'react'
 import Generate from './Generate'
 import RuleDetails from './RuleDetails'
+import GoogleAuth from './GoogleAuth'
 
 export default function Home() {
     const [isGenerateOpen, setIsGenerateOpen] = useState(false)
     const [isRuleDetailsOpen, setIsRuleDetailsOpen] = useState(false)
     const [selectedTile, setSelectedTile] = useState<{ title: string, description: string } | null>(null)
     const [searchText, setSearchText] = useState('')
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     const handleTileClick = (title: string, description: string) => {
         setSelectedTile({ title, description })
         setIsRuleDetailsOpen(true)
+    }
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen)
+    }
+
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false)
     }
 
     const ruleList = [
@@ -41,10 +51,13 @@ export default function Home() {
                 <div className="title">
                     <h1>Cursor Community</h1>
                 </div>
-                <nav className="menu">
+                
+                {/* Desktop Navigation */}
+                <nav className="menu desktop-menu">
                     <ul className="menu-list">
                         <li className="menu-item">
-                            <button className="menu-link">Rules</button>
+                            {/* <button className="menu-link">Rules</button> */}
+                            <GoogleAuth />
                         </li>
                         <li className="menu-item">
                             <button className="menu-link" onClick={() => setIsGenerateOpen(true)}>Generate</button>
@@ -54,6 +67,34 @@ export default function Home() {
                         </li>
                     </ul>
                 </nav>
+                
+                {/* Mobile Hamburger Button */}
+                <button className="mobile-menu-toggle" onClick={toggleMobileMenu} aria-label="Toggle menu">
+                    <div className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                
+                {/* Mobile Navigation */}
+                <nav className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+                    <ul className="mobile-menu-list">
+                        <li className="mobile-menu-item">
+                            {/* <button className="mobile-menu-link" onClick={closeMobileMenu}>Rules</button> */}
+                            <GoogleAuth />
+                        </li>
+                        <li className="mobile-menu-item">
+                            <button className="mobile-menu-link" onClick={() => { setIsGenerateOpen(true); closeMobileMenu(); }}>Generate</button>
+                        </li>
+                        <li className="mobile-menu-item">
+                            <button className="mobile-menu-link" onClick={closeMobileMenu}>Account</button>
+                        </li>
+                    </ul>
+                </nav>
+                
+                {/* Mobile Menu Overlay */}
+                {isMobileMenuOpen && <div className="mobile-menu-overlay" onClick={closeMobileMenu}></div>}
             </header>
             <main className="main-content">
                 <div className="search-container">

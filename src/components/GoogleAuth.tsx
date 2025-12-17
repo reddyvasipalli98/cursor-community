@@ -15,7 +15,7 @@ interface DecodedToken {
 const GoogleAuth: React.FC = () => {
   const { user, isAuthenticated, login, logout } = useAuth();
 
-  const onSuccess = (credentialResponse) => {
+  const onSuccess = (credentialResponse: any) => {
     try {
       if (credentialResponse.credential) {
         const decoded = jwtDecode<DecodedToken>(credentialResponse.credential);

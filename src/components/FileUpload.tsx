@@ -1,7 +1,5 @@
-import { FileUploader } from '@aws-amplify/ui-react-storage';
 import '@aws-amplify/ui-react/styles.css';
 import { useState } from 'react';
-import { downloadData } from 'aws-amplify/storage';
 import { useUser, usePermissions } from '../hooks/useUser';
 import { UserProfileCard, WelcomeMessage } from './UserProfile';
 

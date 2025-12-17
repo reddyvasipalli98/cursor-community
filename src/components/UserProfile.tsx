@@ -3,14 +3,12 @@ import { useUser } from '../hooks/useUser';
 
 interface UserProfileCardProps {
   showEmail?: boolean;
-  showLogout?: boolean;
   compact?: boolean;
   className?: string;
 }
 
 export const UserProfileCard: React.FC<UserProfileCardProps> = ({ 
-  showEmail = true, 
-  showLogout = false,
+  showEmail = true,
   compact = false,
   className = ''
 }) => {

@@ -27,17 +27,17 @@ export default function Home() {
         {
             title: 'Modern Web Development',
             descrip: 'You are an expert developer in TypeScript, Node.js, Next.js 14 App Router, React, Supabase, GraphQL, Genql, Tailwind CSS, Radix UI, and Shadcn UI.',
-            location: '/src/RuleFiles/react/modernwebdev.txt'
+            location: 'https://cursor-community-dev.s3.us-east-1.amazonaws.com/modernwebdev.txt'
         },
         {
             title: 'Modern Vite Development',
             descrip: 'You are an expert in React, Vite, Tailwind CSS, three.js, React three fiber and Next UI.',
-            location: '/src/RuleFiles/react/reactvite.txt'
+            location: 'https://cursor-community-dev.s3.us-east-1.amazonaws.com/reactvite.txt'
         },
         {
             title: 'Gatsby Cursor Rules',
             descrip: 'You are an expert in TypeScript, Gatsby, React and Tailwind.',
-            location: '/src/RuleFiles/react/gatsby.txt'
+            location: 'https://cursor-community-dev.s3.us-east-1.amazonaws.com/gatsby.txt'
         }
     ]
     return (

@@ -15,28 +15,38 @@ export default function RuleDetails({ isOpen, onClose, tileData }: RuleDetailsPr
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && tileData) {
       loadFileContent()
     }
-  }, [isOpen])
+  }, [isOpen, tileData])
 
   const loadFileContent = async () => {
+    if (!tileData?.location) {
+      setFileContent('Error: No file location provided.')
+      return
+    }
+
     try {
       setLoading(true)
-      const moduleContent = await import(tileData?.location + '?raw') //import('../RuleFiles/react/modernwebdev.txt?raw')
+      
+      // Check if it's an external URL (S3, etc.)
+      if (tileData.location.startsWith('http://') || tileData.location.startsWith('https://')) {
+        const response = await fetch(tileData.location)
+        if (response.ok) {
+          const content = await response.text()
+          setFileContent(content)
+        } else {
+          throw new Error(`Failed to fetch file: ${response.status} ${response.statusText}`)
+        }
+      } 
+      // For local files, use import with ?raw
+      else {
+        const moduleContent = await import(tileData.location + '?raw')
         setFileContent(moduleContent.default)
-      // const response = await fetch('/src/RuleFiles/react/modernwebdev.txt')
-      // if (response.ok) {
-      //   const content = await response.text()
-      //   setFileContent(content)
-      // } else {
-      //   // Fallback: try to import the file content
-      //   const moduleContent = await import('../RuleFiles/modernwebdev.txt?raw')
-      //   setFileContent(moduleContent.default)
-      // }
+      }
     } catch (error) {
       console.error('Failed to load file content:', error)
-      setFileContent('Error: Could not load the modernwebdev.txt file content.')
+      setFileContent(`Error: Could not load the file content.\n\nDetails: ${error.message}\n\nFile location: ${tileData?.location}`)
     } finally {
       setLoading(false)
     }

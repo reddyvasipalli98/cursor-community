@@ -46,7 +46,7 @@ export default function RuleDetails({ isOpen, onClose, tileData }: RuleDetailsPr
       }
     } catch (error) {
       console.error('Failed to load file content:', error)
-      setFileContent(`Error: Could not load the file content.\n\nDetails: ${error.message}\n\nFile location: ${tileData?.location}`)
+      setFileContent(`Error: Could not load the file content`)
     } finally {
       setLoading(false)
     }

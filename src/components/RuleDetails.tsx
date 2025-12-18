@@ -6,6 +6,7 @@ interface RuleDetailsProps {
   tileData: {
     title: string
     description: string
+    location: string
   } | null
 }
 
@@ -22,15 +23,17 @@ export default function RuleDetails({ isOpen, onClose, tileData }: RuleDetailsPr
   const loadFileContent = async () => {
     try {
       setLoading(true)
-      const response = await fetch('/src/RuleFiles/modernwebdev.txt')
-      if (response.ok) {
-        const content = await response.text()
-        setFileContent(content)
-      } else {
-        // Fallback: try to import the file content
-        const moduleContent = await import('../RuleFiles/modernwebdev.txt?raw')
+      const moduleContent = await import(tileData?.location + '?raw') //import('../RuleFiles/react/modernwebdev.txt?raw')
         setFileContent(moduleContent.default)
-      }
+      // const response = await fetch('/src/RuleFiles/react/modernwebdev.txt')
+      // if (response.ok) {
+      //   const content = await response.text()
+      //   setFileContent(content)
+      // } else {
+      //   // Fallback: try to import the file content
+      //   const moduleContent = await import('../RuleFiles/modernwebdev.txt?raw')
+      //   setFileContent(moduleContent.default)
+      // }
     } catch (error) {
       console.error('Failed to load file content:', error)
       setFileContent('Error: Could not load the modernwebdev.txt file content.')

@@ -6,12 +6,12 @@ import GoogleAuth from './GoogleAuth'
 export default function Home() {
     const [isGenerateOpen, setIsGenerateOpen] = useState(false)
     const [isRuleDetailsOpen, setIsRuleDetailsOpen] = useState(false)
-    const [selectedTile, setSelectedTile] = useState<{ title: string, description: string } | null>(null)
+    const [selectedTile, setSelectedTile] = useState<{ title: string, description: string, location: string } | null>(null)
     const [searchText, setSearchText] = useState('')
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-    const handleTileClick = (title: string, description: string) => {
-        setSelectedTile({ title, description })
+    const handleTileClick = (title: string, description: string, location: string) => {
+        setSelectedTile({ title, description, location })
         setIsRuleDetailsOpen(true)
     }
 
@@ -23,26 +23,21 @@ export default function Home() {
         setIsMobileMenuOpen(false)
     }
 
-    const ruleList = [
+    const reactList = [
         {
-            title: 'React Ecommerce Project',
-            descrip: 'Learn about our community guidelines and how to participate respectfully.'
+            title: 'Modern Web Development',
+            descrip: 'You are an expert developer in TypeScript, Node.js, Next.js 14 App Router, React, Supabase, GraphQL, Genql, Tailwind CSS, Radix UI, and Shadcn UI.',
+            location: '/src/RuleFiles/react/modernwebdev.txt'
         },
         {
-            title: 'Python project to connect to LLMs',
-            descrip: 'Browse amazing projects created by our community members.'
+            title: 'Modern Vite Development',
+            descrip: 'You are an expert in React, Vite, Tailwind CSS, three.js, React three fiber and Next UI.',
+            location: '/src/RuleFiles/react/reactvite.txt'
         },
         {
-            title: 'Angular Project for Video Player',
-            descrip: 'Explore AI-powered code generation tools and best practices.'
-        },
-        {
-            title: 'Tutorials',
-            descrip: 'Step-by-step guides to help you master Cursor and AI development.'
-        },
-        {
-            title: 'Extensions',
-            descrip: 'Discover useful extensions and plugins to enhance your workflow.'
+            title: 'Gatsby Cursor Rules',
+            descrip: 'You are an expert in TypeScript, Gatsby, React and Tailwind.',
+            location: '/src/RuleFiles/react/gatsby.txt'
         }
     ]
     return (
@@ -116,8 +111,8 @@ export default function Home() {
                     <h2 className="tiles-section-title">Rules...</h2>
                     <div className="tiles-grid">
                         {
-                            ruleList.filter(x => x.title.includes(searchText)).map((ruleItem) => (
-                                <div className="tile" onClick={() => handleTileClick('React Ecommerce Project', 'Learn about our community guidelines and how to participate respectfully.')}>
+                            reactList.filter(x => x.title.includes(searchText)).map((ruleItem) => (
+                                <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
                                     <h3 className="tile-title">{ruleItem.title}</h3>
                                     <p className="tile-description">{ruleItem.descrip}</p>
                                 </div>

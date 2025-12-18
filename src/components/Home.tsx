@@ -40,6 +40,27 @@ export default function Home() {
             location: 'https://cursor-community-dev.s3.us-east-1.amazonaws.com/gatsby.txt'
         }
     ]
+
+    const reactnativelist = [
+        {
+            title: 'React Native Expo Development',
+            descrip: 'You are an expert in TypeScript, React Native, Expo, and Mobile UI development.',
+            location: 'https://cursor-community-dev.s3.us-east-1.amazonaws.com/reactnativeexpo.txt'
+        }
+    ]
+
+    const pythonlist = [
+        {
+            title: 'Python Flask',
+            descrip: 'You are an expert in Python, Flask, and scalable API development.',
+            location: 'https://cursor-community-dev.s3.us-east-1.amazonaws.com/pythonflask.txt'
+        },
+        {
+            title: 'Web Scraper',
+            descrip: 'You are an expert in web scraping and data extraction, with a focus on Python libraries and frameworks such as requests, BeautifulSoup, selenium, and advanced tools like jina, firecrawl, agentQL, and multion.',
+            location: 'https://cursor-community-dev.s3.us-east-1.amazonaws.com/webscraper.txt'
+        }
+    ]
     return (
         <>
             <header className="header">
@@ -108,10 +129,38 @@ export default function Home() {
                 </div>
 
                 <div className="tiles-section">
-                    <h2 className="tiles-section-title">Rules...</h2>
+                    <h2 className="tiles-section-title">React</h2>
                     <div className="tiles-grid">
                         {
                             reactList.filter(x => x.title.includes(searchText)).map((ruleItem) => (
+                                <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
+                                    <h3 className="tile-title">{ruleItem.title}</h3>
+                                    <p className="tile-description">{ruleItem.descrip}</p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <div className="tiles-section">
+                    <h2 className="tiles-section-title">React Native</h2>
+                    <div className="tiles-grid">
+                        {
+                            reactnativelist.filter(x => x.title.includes(searchText)).map((ruleItem) => (
+                                <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
+                                    <h3 className="tile-title">{ruleItem.title}</h3>
+                                    <p className="tile-description">{ruleItem.descrip}</p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <div className="tiles-section">
+                    <h2 className="tiles-section-title">Python</h2>
+                    <div className="tiles-grid">
+                        {
+                            pythonlist.filter(x => x.title.includes(searchText)).map((ruleItem) => (
                                 <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
                                     <h3 className="tile-title">{ruleItem.title}</h3>
                                     <p className="tile-description">{ruleItem.descrip}</p>

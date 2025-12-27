@@ -128,47 +128,53 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="tiles-section">
-                    <h2 className="tiles-section-title">React</h2>
-                    <div className="tiles-grid">
-                        {
-                            reactList.filter(x => x.title.includes(searchText)).map((ruleItem) => (
-                                <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
-                                    <h3 className="tile-title">{ruleItem.title}</h3>
-                                    <p className="tile-description">{ruleItem.descrip}</p>
-                                </div>
-                            ))
-                        }
+                {reactList.filter(x => x.title.includes(searchText)).length > 0 && (
+                    <div className="tiles-section">
+                        <h2 className="tiles-section-title">React</h2>
+                        <div className="tiles-grid">
+                            {
+                                reactList.filter(x => x.title.includes(searchText)).map((ruleItem) => (
+                                    <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
+                                        <h3 className="tile-title">{ruleItem.title}</h3>
+                                        <p className="tile-description">{ruleItem.descrip}</p>
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
-                </div>
+                )}
 
-                <div className="tiles-section">
-                    <h2 className="tiles-section-title">React Native</h2>
-                    <div className="tiles-grid">
-                        {
-                            reactnativelist.filter(x => x.title.includes(searchText)).map((ruleItem) => (
-                                <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
-                                    <h3 className="tile-title">{ruleItem.title}</h3>
-                                    <p className="tile-description">{ruleItem.descrip}</p>
-                                </div>
-                            ))
-                        }
+                {reactnativelist.filter(x => x.title.includes(searchText)).length > 0 && (
+                    <div className="tiles-section">
+                        <h2 className="tiles-section-title">React Native</h2>
+                        <div className="tiles-grid">
+                            {
+                                reactnativelist.filter(x => x.title.includes(searchText)).map((ruleItem) => (
+                                    <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
+                                        <h3 className="tile-title">{ruleItem.title}</h3>
+                                        <p className="tile-description">{ruleItem.descrip}</p>
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
-                </div>
+                )}
 
-                <div className="tiles-section">
-                    <h2 className="tiles-section-title">Python</h2>
-                    <div className="tiles-grid">
-                        {
-                            pythonlist.filter(x => x.title.includes(searchText)).map((ruleItem) => (
-                                <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
-                                    <h3 className="tile-title">{ruleItem.title}</h3>
-                                    <p className="tile-description">{ruleItem.descrip}</p>
-                                </div>
-                            ))
-                        }
+                {pythonlist.filter(x => x.title.includes(searchText)).length > 0 && (
+                    <div className="tiles-section">
+                        <h2 className="tiles-section-title">Python</h2>
+                        <div className="tiles-grid">
+                            {
+                                pythonlist.filter(x => x.title.includes(searchText)).map((ruleItem) => (
+                                    <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
+                                        <h3 className="tile-title">{ruleItem.title}</h3>
+                                        <p className="tile-description">{ruleItem.descrip}</p>
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
-                </div>
+                )}
             </main>
             <Generate isOpen={isGenerateOpen} onClose={() => setIsGenerateOpen(false)} />
             <RuleDetails

@@ -61,6 +61,11 @@ export default function Home() {
             location: 'https://cursor-community-dev.s3.us-east-1.amazonaws.com/webscraper.txt'
         }
     ]
+
+    const normalizedSearch = searchText.toLowerCase()
+    const hasResults = reactList.some(x => x.title.toLowerCase().includes(normalizedSearch)) ||
+        reactnativelist.some(x => x.title.toLowerCase().includes(normalizedSearch)) ||
+        pythonlist.some(x => x.title.toLowerCase().includes(normalizedSearch))
     return (
         <>
             <header className="header">
@@ -89,7 +94,7 @@ export default function Home() {
                     <div className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}>
                         <span></span>
                         <span></span>
-                        <span></span>
+                        <span></span> 
                     </div>
                 </button>
                 
@@ -113,8 +118,8 @@ export default function Home() {
                 {isMobileMenuOpen && <div className="mobile-menu-overlay" onClick={closeMobileMenu}></div>}
             </header>
             <main className="main-content">
-                <div className="search-container">
-                    <div className="search-wrapper">
+                <div className="search-container" style={{ minHeight: 80 }}>
+                    <div className="search-wrapper" style={{ width: '100%' }}>
                         <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
@@ -128,53 +133,55 @@ export default function Home() {
                     </div>
                 </div>
 
-                {reactList.filter(x => x.title.includes(searchText)).length > 0 && (
-                    <div className="tiles-section">
-                        <h2 className="tiles-section-title">React</h2>
-                        <div className="tiles-grid">
-                            {
-                                reactList.filter(x => x.title.includes(searchText)).map((ruleItem) => (
-                                    <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
-                                        <h3 className="tile-title">{ruleItem.title}</h3>
-                                        <p className="tile-description">{ruleItem.descrip}</p>
+                <div className="tiles-wrapper" style={{ minHeight: 220 }}>
+                    {hasResults ? (
+                        <>
+                            {reactList.filter(x => x.title.toLowerCase().includes(normalizedSearch)).length > 0 && (
+                                <div className="tiles-section">
+                                    <h2 className="tiles-section-title">React</h2>
+                                    <div className="tiles-grid">
+                                        {reactList.filter(x => x.title.toLowerCase().includes(normalizedSearch)).map((ruleItem) => (
+                                            <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
+                                                <h3 className="tile-title">{ruleItem.title}</h3>
+                                                <p className="tile-description">{ruleItem.descrip}</p>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                )}
+                                </div>
+                            )}
 
-                {reactnativelist.filter(x => x.title.includes(searchText)).length > 0 && (
-                    <div className="tiles-section">
-                        <h2 className="tiles-section-title">React Native</h2>
-                        <div className="tiles-grid">
-                            {
-                                reactnativelist.filter(x => x.title.includes(searchText)).map((ruleItem) => (
-                                    <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
-                                        <h3 className="tile-title">{ruleItem.title}</h3>
-                                        <p className="tile-description">{ruleItem.descrip}</p>
+                            {reactnativelist.filter(x => x.title.toLowerCase().includes(normalizedSearch)).length > 0 && (
+                                <div className="tiles-section">
+                                    <h2 className="tiles-section-title">React Native</h2>
+                                    <div className="tiles-grid">
+                                        {reactnativelist.filter(x => x.title.toLowerCase().includes(normalizedSearch)).map((ruleItem) => (
+                                            <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
+                                                <h3 className="tile-title">{ruleItem.title}</h3>
+                                                <p className="tile-description">{ruleItem.descrip}</p>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                )}
+                                </div>
+                            )}
 
-                {pythonlist.filter(x => x.title.includes(searchText)).length > 0 && (
-                    <div className="tiles-section">
-                        <h2 className="tiles-section-title">Python</h2>
-                        <div className="tiles-grid">
-                            {
-                                pythonlist.filter(x => x.title.includes(searchText)).map((ruleItem) => (
-                                    <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
-                                        <h3 className="tile-title">{ruleItem.title}</h3>
-                                        <p className="tile-description">{ruleItem.descrip}</p>
+                            {pythonlist.filter(x => x.title.toLowerCase().includes(normalizedSearch)).length > 0 && (
+                                <div className="tiles-section">
+                                    <h2 className="tiles-section-title">Python</h2>
+                                    <div className="tiles-grid">
+                                        {pythonlist.filter(x => x.title.toLowerCase().includes(normalizedSearch)).map((ruleItem) => (
+                                            <div className="tile" onClick={() => handleTileClick(ruleItem.title, ruleItem.descrip, ruleItem.location)} key={ruleItem.title}>
+                                                <h3 className="tile-title">{ruleItem.title}</h3>
+                                                <p className="tile-description">{ruleItem.descrip}</p>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                )}
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <div className="no-results" style={{ padding: 24, color: '#666' }}>No rules match your search.</div>
+                    )}
+                </div>
             </main>
             <Generate isOpen={isGenerateOpen} onClose={() => setIsGenerateOpen(false)} />
             <RuleDetails
